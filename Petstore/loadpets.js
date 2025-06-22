@@ -34,31 +34,61 @@ const pets = [
         "type": "Cat", 
         "age": 3, 
         "img": "img/cats/cat03.jpg" 
+    },
+
+    {
+        "name": "Sunny",
+        "type": "Bird",
+        "age": 2,
+        "img": "img/birds/bird01.jpg"
+    },
+    {
+        "name": "Sky",
+        "type": "Bird",
+        "age": 1,
+        "img": "img/birds/bird02.jpg"
+    },
+    {
+        "name": "Cappy",
+        "type": "Capybara",
+        "age": 3,
+        "img": "img/capybaras/capybara01.jpg"
+    },
+    {
+        "name": "Barry",
+        "type": "Capybara",
+        "age": 2,
+        "img": "img/capybaras/capybara02.jpg"
     }
 ];
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded');
+function renderPets() {
     const petList = document.getElementById('pet-list');
-    console.log('Pet List Element:', petList);
-    
-    if (petList) {
-        console.log('Number of pets to display:', pets.length);
-        pets.forEach((pet, index) => {
-            console.log(`Creating pet ${index + 1}:`, pet.name);
-            const petDiv = document.createElement('div');
-            petDiv.className = 'pet';
-            petDiv.innerHTML = `
-                <img src="${pet.img}" alt="${pet.name}">
-                <h3>${pet.name}</h3>
-                <p>Type: ${pet.type}</p>
-                <p>Age: ${pet.age} years</p>
-                <button onclick="adoptPet()">Adopt Now</button>
-            `;
-            petList.appendChild(petDiv);
-            console.log(`Added ${pet.name} to the page`);
-        });
-    } else {
-        console.error('Could not find pet-list element');
-    }
+    if (!petList) return;
+    petList.innerHTML = '';
+    // Get all checked types
+    const checkedTypes = Array.from(document.querySelectorAll('input[name="pet-type"]:checked')).map(cb => cb.value);
+    // Filter pets by checked types
+    const filtered = pets.filter(pet => checkedTypes.includes(pet.type));
+    // Render filtered pets
+    filtered.forEach(pet => {
+        const petDiv = document.createElement('div');
+        petDiv.className = 'pet';
+        petDiv.innerHTML = `
+            <img src="${pet.img}" alt="${pet.name}">
+            <h3>${pet.name}</h3>
+            <p>Type: ${pet.type}</p>
+            <p>Age: ${pet.age} years</p>
+            <button onclick="adoptPet()">Adopt Now</button>
+        `;
+        petList.appendChild(petDiv);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listeners to all checkboxes
+    document.querySelectorAll('input[name="pet-type"]').forEach(cb => {
+        cb.addEventListener('change', renderPets);
+    });
+    renderPets();
 });
