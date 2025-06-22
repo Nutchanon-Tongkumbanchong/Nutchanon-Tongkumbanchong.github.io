@@ -66,11 +66,15 @@ function renderPets() {
     const petList = document.getElementById('pet-list');
     if (!petList) return;
     petList.innerHTML = '';
-    // Get all checked types
-    const checkedTypes = Array.from(document.querySelectorAll('input[name="pet-type"]:checked')).map(cb => cb.value);
-    // Filter pets by checked types
-    const filtered = pets.filter(pet => checkedTypes.includes(pet.type));
-    // Render filtered pets
+    // Get selected types
+    const types = [];
+    if (document.getElementById('type-dogs').checked) types.push('Dog');
+    if (document.getElementById('type-cats').checked) types.push('Cat');
+    if (document.getElementById('type-capybaras').checked) types.push('Capybara');
+    if (document.getElementById('type-birds').checked) types.push('Bird');
+    // Filter pets
+    const filtered = pets.filter(pet => types.includes(pet.type));
+    // Render
     filtered.forEach(pet => {
         const petDiv = document.createElement('div');
         petDiv.className = 'pet';
