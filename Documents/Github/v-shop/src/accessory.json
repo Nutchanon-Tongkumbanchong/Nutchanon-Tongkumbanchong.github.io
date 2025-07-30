@@ -1,0 +1,10 @@
+[
+    {"id": 1, "name": "Mouse", "price": 10},
+    {"id": 2, "name": "Keyboard", "price": 20},
+    {"id": 3, "name": "Monitor", "price": 100},
+    {"id": 4, "name": "Door Visor", "price": 100},
+    {"id": 5, "name": "Mud Guard", "price": 200},
+    {"id": 6, "name": "Seat Cover", "price": 300},
+    {"id": 7, "name": "Car Perfume", "price": 400},
+    {"id": 8, "name": "Car Charger", "price": 500}
+]
